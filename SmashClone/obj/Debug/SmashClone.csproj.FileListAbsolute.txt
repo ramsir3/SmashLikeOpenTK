@@ -1,9 +1,0 @@
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\bin\Debug\SmashClone.exe.config
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\bin\Debug\SmashClone.exe
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\bin\Debug\SmashClone.pdb
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\bin\Debug\OpenTK.dll
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\bin\Debug\OpenTK.xml
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\obj\Debug\SmashClone.csprojResolveAssemblyReference.cache
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\obj\Debug\SmashClone.exe
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\obj\Debug\SmashClone.pdb
-C:\Users\Ram\Documents\Projects\smash\SmashClone\SmashClone\bin\Debug\Content\penguin4.png
