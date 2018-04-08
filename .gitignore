@@ -2,3 +2,4 @@ packages/
 SmashClone/bin/
 SmashClone/obj/
 *.userprefs
+.vs

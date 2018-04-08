@@ -7,34 +7,18 @@ using System.Threading.Tasks;
 
 namespace SmashClone
 {
-    class Character
+    public class Character
     {
         public enum CharacterState
         {
-            Walk = 0,
-            Idle = 1,
+            Idle = 0,
+            Walk = 1,
             Jump = 2
         }
 
         protected static int numStates = Enum.GetValues(typeof(CharacterState)).Length;
 
-        protected class CharacterAnimation
-        {
-            Character parent;
 
-            //TDOD implement the actual animation construtor
-            public CharacterAnimation(Character parent)
-            {
-                this.parent = parent;
-            }
-
-            //TODO implement draw func
-            public void Draw()
-            {
-                throw new NotImplementedException();
-            }
-
-        }
 
         protected class AnimationArray
         {
@@ -53,6 +37,11 @@ namespace SmashClone
             public CharacterAnimation Get(CharacterState state)
             {
                 return animationArray[(int)state];
+            }
+
+            public static AnimationArray operator+ (AnimationArray a, CharacterAnimation b) {
+                a.Set(b.State, b);
+                return a;
             }
         }
 
