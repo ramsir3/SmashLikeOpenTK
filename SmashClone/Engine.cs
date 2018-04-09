@@ -9,7 +9,8 @@ namespace SmashClone
         Character[] _characters;
         Stage _stage;
 
-
+        static Vector2 ux = new Vector2(1f, 0);
+        static Vector2 uy = new Vector2(0, 1f);
 
         public Engine(Character[] characters, Stage stage)
         {
@@ -39,14 +40,13 @@ namespace SmashClone
                 case CharacterState.Idle:
                     break;
                 case CharacterState.Walk:
-                    Vector2 mv = new Vector2(c.WalkSpeed, 0);
                     if (c.Facing == CharacterFacing.Left)
                     {
-                        c.Move(-1*mv);
+                        c.Move(-c.WalkSpeed * ux);
                     }
                     else
                     {
-                        c.Move(mv);
+                        c.Move(c.WalkSpeed * ux);
                     }
                     break;
                 default:
@@ -57,17 +57,21 @@ namespace SmashClone
 
         void CalcState(Character c, KeyboardState keyState, KeyboardState lastKeyState)
         {
-            if (keyState.IsKeyDown(MoveLeft))
+            if (c.Grounded && keyState.IsKeyDown(MoveLeft))
             {
+                c.ActiveInput = true;
                 c.Facing = CharacterFacing.Left;
                 c.State = CharacterState.Walk;
-            }
-            if (keyState.IsKeyDown(MoveRight))
+			}
+            if (c.Grounded && keyState.IsKeyDown(MoveRight))
             {
+                c.ActiveInput = true;
                 c.Facing = CharacterFacing.Right;
                 c.State = CharacterState.Walk;
             }
-            if (!c.Grounded && !IsKeyRegistered(keyState)) {
+            if (c.Grounded && !IsKeyRegistered(keyState)) {
+
+                c.ActiveInput = false;
                 c.State = CharacterState.Idle;
             }
         }

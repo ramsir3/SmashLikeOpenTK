@@ -28,11 +28,6 @@ namespace SmashClone
             _radius = radius;
         }
 
-        public static HitBox operator+ (HitBox box, Vector2 pos)
-        {
-            return new HitBox(box.Center+pos, box.Radius);
-        }
-
     }
 }
 

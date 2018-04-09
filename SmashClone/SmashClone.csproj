@@ -60,7 +60,6 @@
     <Compile Include="CharacterAnimation.cs" />
     <Compile Include="DefaultCharacter\Default.cs" />
     <Compile Include="DefaultCharacter\DefaultIdle.cs" />
-    <Compile Include="CharacterModel.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="DefaultCharacter\DefaultWalk.cs" />
   </ItemGroup>

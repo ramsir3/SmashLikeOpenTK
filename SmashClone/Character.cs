@@ -8,7 +8,7 @@ using static SmashClone.Constants;
 
 namespace SmashClone
 {
-    public class Character
+    public abstract class Character
     {
 
         protected class AnimationArray
@@ -50,6 +50,8 @@ namespace SmashClone
         public CharacterState State;
         public CharacterFacing Facing;
         public bool Grounded;
+        public bool Interruptable;
+        public bool ActiveInput;
         protected AnimationArray _animations;
         #endregion
 
@@ -60,20 +62,20 @@ namespace SmashClone
 
         public Character()
         {
+            Grounded = true;
             _pos = new Vector2(0, 0);
             State = CharacterState.Idle;
-
             _animations = new AnimationArray();
 
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
-            Console.WriteLine(State);
-            _animations[State].Draw(_pos);
+            //Console.WriteLine(State);
+            _animations[State].Draw(_pos, ActiveInput);
         }
 
-        public void Move(Vector2 mv)
+        public virtual void Move(Vector2 mv)
         {
             _pos += mv;
         }

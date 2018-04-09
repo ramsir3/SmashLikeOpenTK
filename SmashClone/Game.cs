@@ -88,15 +88,15 @@ namespace SmashClone
             this.SwapBuffers();
         }
 
-        public static void DrawBox(IBox box)
+        public static void DrawBox(IBox box, Vector2 pos)
         {
             float vec = (float)Math.Sin(Math.PI / 4) * box.Radius;
             GL.Begin(PrimitiveType.Quads);
             GL.Color3(box.Color);
-            GL.Vertex2(box.Center.X - vec, box.Center.Y - vec);
-            GL.Vertex2(box.Center.X + vec, box.Center.Y - vec);
-            GL.Vertex2(box.Center.X + vec, box.Center.Y + vec);
-            GL.Vertex2(box.Center.X - vec, box.Center.Y + vec);
+            GL.Vertex2(box.Center.X + pos.X - vec, box.Center.Y + pos.Y - vec);
+            GL.Vertex2(box.Center.X + pos.X + vec, box.Center.Y + pos.Y - vec);
+            GL.Vertex2(box.Center.X + pos.X + vec, box.Center.Y + pos.Y + vec);
+            GL.Vertex2(box.Center.X + pos.X - vec, box.Center.Y + pos.Y + vec);
             GL.End();
         }
     }
