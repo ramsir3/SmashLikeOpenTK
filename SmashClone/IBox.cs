@@ -14,4 +14,5 @@ namespace SmashClone
         float Radius { get; }
         Color Color { get; }
     }
+
 }

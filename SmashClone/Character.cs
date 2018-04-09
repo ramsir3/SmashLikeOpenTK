@@ -4,21 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SmashClone.Constants;
 
 namespace SmashClone
 {
     public class Character
     {
-        public enum CharacterState
-        {
-            Idle = 0,
-            Walk = 1,
-            Jump = 2
-        }
-
-        protected static int numStates = Enum.GetValues(typeof(CharacterState)).Length;
-
-
 
         protected class AnimationArray
         {
@@ -26,7 +17,7 @@ namespace SmashClone
 
             public AnimationArray()
             {
-                animationArray = new CharacterAnimation[numStates];
+                animationArray = new CharacterAnimation[NumStates];
             }
 
             public void Set(CharacterState state, CharacterAnimation animation)
@@ -34,9 +25,17 @@ namespace SmashClone
                 animationArray[(int)state] = animation;
             }
 
-            public CharacterAnimation Get(CharacterState state)
+            public CharacterAnimation this[CharacterState state]
             {
-                return animationArray[(int)state];
+                get
+                {
+                    return animationArray[(int)state];
+                }
+
+                set
+                {
+                    Set(state, value);
+                }
             }
 
             public static AnimationArray operator+ (AnimationArray a, CharacterAnimation b) {
@@ -45,31 +44,39 @@ namespace SmashClone
             }
         }
 
-        protected Vector2 pos;
-        protected CharacterState state;
-        protected AnimationArray animations;
+
+#region Character state attr.
+        protected Vector2 _pos;
+        public CharacterState State;
+        public CharacterFacing Facing;
+        public bool Grounded;
+        protected AnimationArray _animations;
+        #endregion
+
+#region Character attr.
+        public float WalkSpeed;
+        public float FallSpeed;
+#endregion
 
         public Character()
         {
-            pos = new Vector2(0, 0);
-            state = CharacterState.Idle;
+            _pos = new Vector2(0, 0);
+            State = CharacterState.Idle;
 
-            animations = new AnimationArray();
-            //animations.Set(CharacterState.Idle, new CharacterAnimation(this, ).)
+            _animations = new AnimationArray();
 
-        }
-
-        public void SetState(CharacterState state)
-        {
-            this.state = state;
         }
 
         public void Draw()
         {
-            animations.Get(state).Draw();
+            Console.WriteLine(State);
+            _animations[State].Draw(_pos);
         }
 
-
+        public void Move(Vector2 mv)
+        {
+            _pos += mv;
+        }
     }
 
 }

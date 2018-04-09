@@ -8,20 +8,31 @@ using System.Threading.Tasks;
 
 namespace SmashClone
 {
-    struct HitBox : IBox
+    public struct HitBox : IBox
     {
-        private Vector2 center;
-        private float radius;
+        Vector2 _center;
+        float _radius;
 
-        public Vector2 Center { get { return center; } }
-        public float Radius { get { return radius; } }
-        public Color Color { get { return Constants.HitBoxColor; } }
+        public Vector2 Center { get => _center; }
+        public float Radius { get => _radius; }
+        public Color Color { get => Constants.HitBoxColor; }
+
+
+        //public Vector2 Center { get; set;}
+        //public float Radius { get; } }
+        //public Color Color { get { return Constants.HitBoxColor; } }
 
         public HitBox(Vector2 center, float radius)
         {
-            this.center = center;
-            this.radius = radius;
+            _center = center;
+            _radius = radius;
         }
+
+        public static HitBox operator+ (HitBox box, Vector2 pos)
+        {
+            return new HitBox(box.Center+pos, box.Radius);
+        }
+
     }
 }
 

@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace SmashClone
 {
-    class Stage
+    public class Stage
     {
         float ground;
 

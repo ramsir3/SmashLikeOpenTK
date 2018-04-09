@@ -4,10 +4,12 @@ namespace SmashClone.DefaultCharacter
 {
     public class Default:Character
     {
-        public Default() {
-            animations += new DefaultIdle();
-
         
+        public Default() {
+            WalkSpeed = 0.01f;
+
+            _animations += new DefaultIdle();
+            _animations += new DefaultWalk();       
 
         }
     }

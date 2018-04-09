@@ -16,6 +16,7 @@ namespace SmashClone
         Texture2D texture;
         View view;
         Stage stage;
+        Engine engine;
 
         public Game(int width, int height)
             : base(width, height)
@@ -32,6 +33,8 @@ namespace SmashClone
 
             view = new View(Vector2.Zero, 1.0, 0.0);
             stage = new Stage(-0.3f);
+            engine = new Engine(new Character[] { new DefaultCharacter.Default() }, stage);
+
         }
 
         protected override void OnLoad(EventArgs e)
@@ -41,10 +44,16 @@ namespace SmashClone
             texture = ContentPipe.LoadTexture("penguin4.png");
         }
 
+        KeyboardState lastKeystate;
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
             view.Update();
+
+            KeyboardState keyState = Keyboard.GetState();
+            engine.Play(keyState, lastKeystate);
+            lastKeystate = keyState;
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -74,9 +83,21 @@ namespace SmashClone
             //GL.End();
 
             stage.Draw();
-
+            engine.Draw();
 
             this.SwapBuffers();
+        }
+
+        public static void DrawBox(IBox box)
+        {
+            float vec = (float)Math.Sin(Math.PI / 4) * box.Radius;
+            GL.Begin(PrimitiveType.Quads);
+            GL.Color3(box.Color);
+            GL.Vertex2(box.Center.X - vec, box.Center.Y - vec);
+            GL.Vertex2(box.Center.X + vec, box.Center.Y - vec);
+            GL.Vertex2(box.Center.X + vec, box.Center.Y + vec);
+            GL.Vertex2(box.Center.X - vec, box.Center.Y + vec);
+            GL.End();
         }
     }
 }
