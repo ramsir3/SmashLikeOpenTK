@@ -10,23 +10,27 @@ using System.Drawing;
 
 namespace SmashClone
 {
-    class Stage
+    public class Stage
     {
-        float ground;
+        float _ground;
+        float _friction;
 
-        public float Ground { get { return ground; } }
+        public float Ground { get { return _ground; } }
+        public float Friction { get { return _friction; } }
 
-        public Stage(float ground)
+
+        public Stage(float ground, float friction)
         {
-            this.ground = ground;
+            _ground = ground;
+            _friction = friction;
         }
 
         public void Draw()
         {
             GL.Begin(PrimitiveType.Quads);
             GL.Color3(Color.GhostWhite);
-            GL.Vertex2(-1f, ground);
-            GL.Vertex2(1f, ground);
+            GL.Vertex2(-1f, _ground);
+            GL.Vertex2(1f, _ground);
             GL.Vertex2(1f, -0.9f);
             GL.Vertex2(-1f, -0.9f);
             GL.End();

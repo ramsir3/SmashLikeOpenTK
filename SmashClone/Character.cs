@@ -4,83 +4,155 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SmashClone.Constants;
 
 namespace SmashClone
 {
-    class Character
+    public abstract class Character
     {
-        public enum CharacterState
+		protected class AnimationArray
+		{
+			private CharacterAnimation[] animationArray;
+			
+			public AnimationArray()
+			{
+				animationArray = new CharacterAnimation[NumStates];
+			}
+			
+			public void Set(CharacterState state, CharacterAnimation animation)
+			{
+				animationArray[(int)state] = animation;
+			}
+			
+			public CharacterAnimation this[CharacterState state]
+			{
+				get
+				{
+					return animationArray[(int)state];
+				}
+				
+				set
+				{
+					Set(state, value);
+				}
+			}
+			
+			public static AnimationArray operator+ (AnimationArray a, CharacterAnimation b) {
+				a.Set(b.State, b);
+				return a;
+			}
+		}
+
+        #region Character state attr.
+        protected Vector2 _pos;
+        protected Vector2 _vel;
+        protected Vector2 _acc;
+        public CharacterState State;
+        public CharacterFacing Facing;
+        public bool Grounded;
+        public bool Interruptable;
+        public bool ActiveInput;
+        protected AnimationArray _animations;
+        #endregion
+
+        #region Character attr.
+        protected float _walkSpeed;
+        protected float _fallSpeed;
+        protected float _jumpHeight;
+
+        public Vector2 Pos { get => _pos; }
+        public Vector2 Vel { get => _vel; }
+        public Vector2 Acc { get => _acc; }
+        public float WalkSpeed { get => _walkSpeed; }
+        public float FallSpeed { get => _fallSpeed; }
+        public float JumpHeight { get => _jumpHeight; }
+        #endregion
+
+
+
+        protected Character()
         {
-            Walk = 0,
-            Idle = 1,
-            Jump = 2
+            _init(new Vector2(0f, 0f));
         }
 
-        protected static int numStates = Enum.GetValues(typeof(CharacterState)).Length;
-
-        protected class CharacterAnimation
+        protected Character(Vector2 pos)
         {
-            Character parent;
+            _init(pos);
 
-            //TDOD implement the actual animation construtor
-            public CharacterAnimation(Character parent)
+        }
+
+        void _init(Vector2 pos)
+        {
+            _animations = new AnimationArray();
+            _pos = pos;
+            _vel = new Vector2(0, 0);
+            _acc = new Vector2(0, 0);
+
+            Grounded = true;
+            State = CharacterState.Idle;
+        }
+
+        public virtual void Draw()
+        {
+            //Console.WriteLine(State);
+            _animations[State].Draw(Pos, ActiveInput);
+        }
+
+        public virtual void Move(Vector2 mv)
+        {
+            _pos += mv;
+        }
+
+        public virtual void AddAcc(Vector2 acc)
+        {
+            _acc += acc;
+        }
+
+        public virtual void AddVel(Vector2 vel)
+        {
+            _vel += vel;
+        }
+
+        public virtual void SetGrounded()
+        {
+            if (_acc.Y < 0)
             {
-                this.parent = parent;
+                _acc.Y = 0;
             }
-
-            //TODO implement draw func
-            public void Draw()
+            if (_vel.Y < 0)
             {
-                throw new NotImplementedException();
+                _vel.Y = 0;
             }
-
+            Grounded = true;
         }
 
-        protected class AnimationArray
+        public virtual void Physics()
         {
-            private CharacterAnimation[] animationArray;
+            _vel += _acc;
+            _pos += _vel;
+            _acc.Y = 0;
+            _acc.X = 0;
+        }
 
-            public AnimationArray()
+        public virtual void ApplyStageFriction(float f)
+        {
+            if (_vel.X < 0)
             {
-                animationArray = new CharacterAnimation[numStates];
+                _vel.X += f;
+                if (_vel.X > 0)
+                {
+                    _vel.X = 0;
+                }            
             }
-
-            public void Set(CharacterState state, CharacterAnimation animation)
+            else if (_vel.X > 0)
             {
-                animationArray[(int)state] = animation;
+                _vel.X -= f;
+                if (_vel.X < 0)
+                {
+                    _vel.X = 0;
+                }
             }
-
-            public CharacterAnimation Get(CharacterState state)
-            {
-                return animationArray[(int)state];
-            }
         }
-
-        protected Vector2 pos;
-        protected CharacterState state;
-        protected AnimationArray animations;
-
-        public Character()
-        {
-            pos = new Vector2(0, 0);
-            state = CharacterState.Idle;
-
-            animations = new AnimationArray();
-            //animations.Set(CharacterState.Idle, new CharacterAnimation(this, ).)
-
-        }
-
-        public void SetState(CharacterState state)
-        {
-            this.state = state;
-        }
-
-        public void Draw()
-        {
-            animations.Get(state).Draw();
-        }
-
-
     }
 
 }

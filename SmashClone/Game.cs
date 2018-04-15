@@ -16,6 +16,9 @@ namespace SmashClone
         Texture2D texture;
         View view;
         Stage stage;
+        Engine engine;
+        KeyboardState lastKeystate;
+        KeyboardState keyState;
 
         public Game(int width, int height)
             : base(width, height)
@@ -31,7 +34,9 @@ namespace SmashClone
             GL.AlphaFunc(AlphaFunction.Gequal, 0.5f);
 
             view = new View(Vector2.Zero, 1.0, 0.0);
-            stage = new Stage(-0.3f);
+            stage = new Stage(-0.3f, 0.00005f);
+            engine = new Engine(new Character[] { new DefaultCharacter.Default() }, stage);
+
         }
 
         protected override void OnLoad(EventArgs e)
@@ -45,6 +50,11 @@ namespace SmashClone
         {
             base.OnUpdateFrame(e);
             view.Update();
+
+            keyState = Keyboard.GetState();
+            engine.Play(keyState, lastKeystate);
+            lastKeystate = keyState;
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -74,9 +84,21 @@ namespace SmashClone
             //GL.End();
 
             stage.Draw();
-
+            engine.Draw();
 
             this.SwapBuffers();
+        }
+
+        public static void DrawBox(IBox box, Vector2 pos)
+        {
+            float vec = (float)Math.Sin(Math.PI / 4) * box.Radius;
+            GL.Begin(PrimitiveType.Quads);
+            GL.Color3(box.Color);
+            GL.Vertex2(box.Center.X + pos.X - vec, box.Center.Y + pos.Y - vec);
+            GL.Vertex2(box.Center.X + pos.X + vec, box.Center.Y + pos.Y - vec);
+            GL.Vertex2(box.Center.X + pos.X + vec, box.Center.Y + pos.Y + vec);
+            GL.Vertex2(box.Center.X + pos.X - vec, box.Center.Y + pos.Y + vec);
+            GL.End();
         }
     }
 }
