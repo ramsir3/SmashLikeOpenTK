@@ -9,7 +9,6 @@ namespace SmashClone
         public DefaultWalk()
         {
             _frame = 0;
-            _numFrames = 10;
             _start = 3;
             _main = 5;
             _end = 9;

@@ -4,22 +4,24 @@ using OpenTK;
 using static SmashClone.Constants;
 namespace SmashClone.DefaultCharacter
 {
-    public class Default:Character
+    public class Default : Character
     {
-        
-        public Default() {
+
+        public Default()
+        {
             //define initial state
-			_pos = new Vector2(0, 0);
-            Grounded = true;
-            State = CharacterState.Idle;
+            _pos = new Vector2(0, 0);
 
             //define character attributes
-            WalkSpeed = 0.01f;
-            FallSpeed = 0.05f;
+            _walkSpeed = 0.0001f;
+            _fallSpeed = 0.0005f;
+            _jumpHeight = 0.02f;
 
             //register animations
             _animations += new DefaultIdle();
-            _animations += new DefaultWalk();       
+            _animations += new DefaultWalk();
+            _animations += new DefaultAnimation(CharacterState.Jump);
+
 
         }
     }

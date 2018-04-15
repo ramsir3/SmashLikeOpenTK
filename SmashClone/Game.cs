@@ -17,6 +17,8 @@ namespace SmashClone
         View view;
         Stage stage;
         Engine engine;
+        KeyboardState lastKeystate;
+        KeyboardState keyState;
 
         public Game(int width, int height)
             : base(width, height)
@@ -32,7 +34,7 @@ namespace SmashClone
             GL.AlphaFunc(AlphaFunction.Gequal, 0.5f);
 
             view = new View(Vector2.Zero, 1.0, 0.0);
-            stage = new Stage(-0.3f);
+            stage = new Stage(-0.3f, 0.00005f);
             engine = new Engine(new Character[] { new DefaultCharacter.Default() }, stage);
 
         }
@@ -44,13 +46,12 @@ namespace SmashClone
             texture = ContentPipe.LoadTexture("penguin4.png");
         }
 
-        KeyboardState lastKeystate;
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
             view.Update();
 
-            KeyboardState keyState = Keyboard.GetState();
+            keyState = Keyboard.GetState();
             engine.Play(keyState, lastKeystate);
             lastKeystate = keyState;
 

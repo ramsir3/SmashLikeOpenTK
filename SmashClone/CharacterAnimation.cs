@@ -1,20 +1,20 @@
 ﻿using System;
 using OpenTK;
+using static SmashClone.Constants;
 
 namespace SmashClone
 {
     public abstract class CharacterAnimation
     {
-        protected Constants.CharacterState _state;
+        protected CharacterState _state;
         protected HitBox[][] _hitBoxes;
         protected int _frame;
-        protected int _numFrames;
         protected int _start = -1;
         protected int _main;
         protected int _end = -1;
         public bool Active;
 
-        public Constants.CharacterState State { get
+        public CharacterState State { get
             {
                 return _state;
             }}

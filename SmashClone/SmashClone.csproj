@@ -62,6 +62,7 @@
     <Compile Include="DefaultCharacter\DefaultIdle.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="DefaultCharacter\DefaultWalk.cs" />
+    <Compile Include="DefaultCharacter\DefaultAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
