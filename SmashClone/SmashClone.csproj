@@ -11,6 +11,21 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,37 +61,62 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HitBox.cs" />
-    <Compile Include="IBox.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="ContentPipe.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Common\CLoopedAnimation.cs" />
+    <Compile Include="Common\HitBox.cs" />
+    <Compile Include="Common\IBox.cs" />
+    <Compile Include="Common\Character.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Game\ContentPipe.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="SmashClone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stage.cs" />
-    <Compile Include="Texture2D.cs" />
-    <Compile Include="View.cs" />
-    <Compile Include="CharacterAnimation.cs" />
-    <Compile Include="DefaultCharacter\Default.cs" />
-    <Compile Include="DefaultCharacter\DefaultIdle.cs" />
-    <Compile Include="Engine.cs" />
-    <Compile Include="DefaultCharacter\DefaultWalk.cs" />
-    <Compile Include="DefaultCharacter\DefaultAnimation.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Stage.cs" />
+    <Compile Include="Game\Texture2D.cs" />
+    <Compile Include="Game\View.cs" />
+    <Compile Include="Common\CAnimation.cs" />
+    <Compile Include="Characters\DefaultCharacter\Character.cs" />
+    <Compile Include="Characters\DefaultCharacter\Idle.cs" />
+    <Compile Include="Game\Engine.cs" />
+    <Compile Include="Characters\DefaultCharacter\Walk.cs" />
+    <Compile Include="Characters\DefaultCharacter\DefaultAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Characters\DefaultCharacter\anim\Walk.anim" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\penguin4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Properties\New Folder\" />
-    <Folder Include="DefaultCharacter\" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>cd $(SolutionDir)
+call AnimProcessor.bat
+echo %25ERRORLEVEL%25</PreBuildEvent>
+  </PropertyGroup>
 </Project>
