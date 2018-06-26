@@ -4,7 +4,7 @@ using static SmashClone.Constants;
 
 namespace SmashClone
 {
-    public abstract class CharacterAnimation
+    public abstract class CAnimation
     {
         protected CharacterState _state;
         protected HitBox[][] _hitBoxes;
@@ -14,10 +14,7 @@ namespace SmashClone
         protected int _end = -1;
         public bool Active;
 
-        public CharacterState State { get
-            {
-                return _state;
-            }}
+        public CharacterState State { get => _state; }
 
         public virtual void Draw(Vector2 pos, bool active)
         {
@@ -28,7 +25,7 @@ namespace SmashClone
             AdvanceFrame(active);
         }
 
-        public virtual void AdvanceFrame(bool active)
+        protected virtual void AdvanceFrame(bool active)
         {
             if (_frame+1 > _end)
             {

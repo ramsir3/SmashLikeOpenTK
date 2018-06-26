@@ -1,10 +1,11 @@
 ﻿using System;
 using OpenTK;
+using SmashClone;
 using static SmashClone.Constants;
 
-namespace SmashClone
+namespace DefaultCharacter
 {
-    public class DefaultAnimation : CharacterAnimation
+    public class DefaultAnimation : CAnimation
     {
         public DefaultAnimation(CharacterState state)
         {

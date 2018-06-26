@@ -12,19 +12,19 @@ namespace SmashClone
     {
 		protected class AnimationArray
 		{
-			private CharacterAnimation[] animationArray;
+			private CAnimation[] animationArray;
 			
 			public AnimationArray()
 			{
-				animationArray = new CharacterAnimation[NumStates];
+				animationArray = new CAnimation[NumStates];
 			}
 			
-			public void Set(CharacterState state, CharacterAnimation animation)
+			public void Set(CharacterState state, CAnimation animation)
 			{
 				animationArray[(int)state] = animation;
 			}
 			
-			public CharacterAnimation this[CharacterState state]
+			public CAnimation this[CharacterState state]
 			{
 				get
 				{
@@ -37,7 +37,7 @@ namespace SmashClone
 				}
 			}
 			
-			public static AnimationArray operator+ (AnimationArray a, CharacterAnimation b) {
+			public static AnimationArray operator+ (AnimationArray a, CAnimation b) {
 				a.Set(b.State, b);
 				return a;
 			}

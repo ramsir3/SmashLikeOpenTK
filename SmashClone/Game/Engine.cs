@@ -30,8 +30,11 @@ namespace SmashClone
 
         public void Draw()
         {
-            Character c = _characters[0];
-            c.Draw();
+            foreach (var c in _characters)
+            {
+                c.Draw();
+            }
+
         }
 
         void PlayCharacter(Character c)
@@ -98,7 +101,6 @@ namespace SmashClone
                 c.SetGrounded();
             }
             c.Physics();
-
         }
 
         bool Collision(IBox box1, IBox box2)
@@ -116,8 +118,6 @@ namespace SmashClone
         {
             return c.Pos.Y >= _stage.Ground;
         }
-
-
     }
 
 
