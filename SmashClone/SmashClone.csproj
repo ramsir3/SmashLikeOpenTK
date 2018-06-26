@@ -68,7 +68,7 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Game\ContentPipe.cs" />
     <Compile Include="Game\Game.cs" />
-    <Compile Include="SmashClone.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
