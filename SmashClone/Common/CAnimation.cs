@@ -1,26 +1,27 @@
 ﻿using System;
 using OpenTK;
-using static SmashClone.Constants;
+using static SmashClone.Common.Constants;
+using SmashClone.Driver;
 
-namespace SmashClone
+namespace SmashClone.Common
 {
     public abstract class CAnimation
     {
-        protected CharacterState _state;
-        protected HitBox[][] _hitBoxes;
+        protected AnimationState _state;
+        protected Box[][] _hurtBoxes;
         protected int _frame;
         protected int _start = -1;
         protected int _main;
         protected int _end = -1;
         public bool Active;
 
-        public CharacterState State { get => _state; }
+        public AnimationState State { get => _state; }
 
         public virtual void Draw(Vector2 pos, bool active)
         {
-            foreach (HitBox box in _hitBoxes[_frame])
+            foreach (Box box in _hurtBoxes[_frame])
             {
-                Game.DrawBox(box, pos);
+                Game.DrawBox(box, pos, HurtBoxColor);
             }
             AdvanceFrame(active);
         }

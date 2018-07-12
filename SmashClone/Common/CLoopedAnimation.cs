@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmashClone
+namespace SmashClone.Common
 {
     public abstract class CLoopedAnimation:CAnimation
     {

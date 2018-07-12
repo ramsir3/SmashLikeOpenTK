@@ -1,20 +1,21 @@
 ﻿using System;
 using OpenTK;
 using SmashClone;
-using static SmashClone.Constants;
+using static SmashClone.Common.Constants;
+using SmashClone.Common;
 
-namespace DefaultCharacter
+namespace SmashClone.Characters.DefaultCharacter
 {
     public class DefaultAnimation : CAnimation
     {
-        public DefaultAnimation(CharacterState state)
+        public DefaultAnimation(AnimationState state)
         {
             _frame = 0;
             _state = state;
-            _hitBoxes = new HitBox[][] {
-                new HitBox[] //Frame 0
+            _hurtBoxes = new Box[][] {
+                new Box[] //Frame 0
                 {
-                    new HitBox(new Vector2(0, 0), 0.1f)
+                    new Box(new Vector2(0, 0), 0.1f)
                 }
             };
         }

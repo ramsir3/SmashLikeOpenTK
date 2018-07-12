@@ -2,7 +2,7 @@
     "_type" : "anim",
     "_frame" : 0,
     "_end" : 0,
-    "_hitBoxes" : [
+    "_hurtBoxes" : [
         [[0, 0, 0.1]]
     ]
 }
