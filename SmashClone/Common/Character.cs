@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static SmashClone.Common.Constants;
 using static SmashClone.Common.VolatileStates;
+using System.Drawing;
 
 
 namespace SmashClone.Common
@@ -14,19 +15,19 @@ namespace SmashClone.Common
     {
 		protected class AnimationArray
 		{
-			private CAnimation[] animationArray;
+			private readonly CAnimation[] animationArray;
 			
 			public AnimationArray()
 			{
 				animationArray = new CAnimation[NumAnimations];
 			}
 			
-			public void Set(AnimationState state, CAnimation animation)
+			public void Set(AnimationStates state, CAnimation animation)
 			{
 				animationArray[(int)state] = animation;
 			}
 			
-			public CAnimation this[AnimationState state]
+			public CAnimation this[AnimationStates state]
 			{
 				get
 				{
@@ -55,6 +56,8 @@ namespace SmashClone.Common
         public float WalkSpeed { get => _walkSpeed; }
         public float FallSpeed { get => _fallSpeed; }
         public float JumpHeight { get => _jumpHeight; }
+
+        public Color _color;
         #endregion
 
         protected Character()
@@ -62,10 +65,10 @@ namespace SmashClone.Common
             _animations = new AnimationArray();
         }
 
-        public virtual void Draw(AnimationState animation, Vector2 pos, State volatilestate)
+        public virtual void Draw(AnimationStates animation, Vector2 pos, State volatilestate)
         {
             //Console.WriteLine(State);
-            _animations[animation].Draw(pos, volatilestate == Grounded);
+            _animations[animation].Draw(pos, volatilestate == ActiveInput, _color);
         }
     }
 

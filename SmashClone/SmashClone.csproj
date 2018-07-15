@@ -71,6 +71,7 @@
     <Compile Include="Common\State.cs" />
     <Compile Include="Common\VolatileStates.cs" />
     <Compile Include="Driver\ContentPipe.cs" />
+    <Compile Include="Driver\Draw.cs" />
     <Compile Include="Driver\Game.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Characters\DefaultCharacter\DefaultAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AnimProcessor.bat" />
     <None Include="App.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
@@ -103,7 +105,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="AnimProcessor.py" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>

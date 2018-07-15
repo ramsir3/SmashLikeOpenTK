@@ -6,12 +6,6 @@ using System.Threading.Tasks;
 
 namespace SmashClone.Common
 {
-    /* Input States
-     * 0b0_0000_0000_0000_0000;
-     *    t1234c1234_sjab_udlr
-     *     ^    ^
-     * taunts  cstick          */
-
     public struct State
     {
         public uint Data { get; set; }

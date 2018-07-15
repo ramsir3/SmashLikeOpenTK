@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static SmashClone.Common.Constants;
 using OpenTK;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 
 namespace SmashClone.Common
 {
@@ -17,12 +19,15 @@ namespace SmashClone.Common
         public Character Character;
         public Controls Controls;
         public State InputState;
+        public State LastInputState;
         public State VolatileState;
-        public AnimationState AnimationState;
+        public AnimationStates AnimationState;
 
         public Vector2 Pos { get => _pos; }
         public Vector2 Vel { get => _vel; }
         public Vector2 Acc { get => _acc; }
+
+        public int model;
 
         public Player(Character character, Controls controls, Vector2 pos)
         {
@@ -33,31 +38,39 @@ namespace SmashClone.Common
             _vel = new Vector2(0, 0);
             _acc = new Vector2(0, 0);
 
-            AnimationState = AnimationState.Idle;
+            AnimationState = AnimationStates.Idle;
+
+            //model = GL.GetUniformLocation(shaderpr)
         }
 
-        public virtual void Draw()
+        public void Draw()
         {
             //Console.WriteLine(State);
             Character.Draw(AnimationState, Pos, VolatileState);
         }
 
-        public virtual void Move(Vector2 mv)
+        public void SetInputStates(KeyboardState keyState, KeyboardState lastKeyState)
+        {
+            InputState = Controls.GetControl(keyState);
+            LastInputState = Controls.GetControl(lastKeyState);
+        }
+
+        public void Move(Vector2 mv)
         {
             _pos += mv;
         }
 
-        public virtual void AddAcc(Vector2 acc)
+        public void AddAcc(Vector2 acc)
         {
             _acc += acc;
         }
 
-        public virtual void AddVel(Vector2 vel)
+        public void AddVel(Vector2 vel)
         {
             _vel += vel;
         }
 
-        public virtual void SetGrounded()
+        public void SetGrounded()
         {
             if (_acc.Y < 0)
             {
@@ -70,7 +83,7 @@ namespace SmashClone.Common
             VolatileState += VolatileStates.Grounded;
         }
 
-        public virtual void Physics()
+        public void Physics()
         {
             _vel += _acc;
             _pos += _vel;
@@ -78,7 +91,7 @@ namespace SmashClone.Common
             _acc.X = 0;
         }
 
-        public virtual void ApplyStageFriction(float f)
+        public void ApplyStageFriction(float f)
         {
             if (_vel.X < 0)
             {

@@ -48,7 +48,8 @@ namespace SmashClone.Driver
             transform = Matrix4.Mult(transform, Matrix4.CreateRotationZ(-(float)rotation));
             transform = Matrix4.Mult(transform, Matrix4.CreateScale((float)zoomX, (float)zoomY, 1.0f));
 
-            GL.MultMatrix(ref transform);
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadMatrix(ref transform);
         }
     }
 }

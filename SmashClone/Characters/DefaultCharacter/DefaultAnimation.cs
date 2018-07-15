@@ -8,10 +8,14 @@ namespace SmashClone.Characters.DefaultCharacter
 {
     public class DefaultAnimation : CAnimation
     {
-        public DefaultAnimation(AnimationState state)
+        public DefaultAnimation(AnimationStates state)
+        {
+            _state = state;
+        }
+
+        public override void Init()
         {
             _frame = 0;
-            _state = state;
             _hurtBoxes = new Box[][] {
                 new Box[] //Frame 0
                 {
@@ -19,6 +23,7 @@ namespace SmashClone.Characters.DefaultCharacter
                 }
             };
         }
+
 
     }
 }

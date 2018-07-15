@@ -12,8 +12,8 @@ namespace SmashClone.Driver
         Player[] _players;
         Stage _stage;
 
-        static Vector2 ux = new Vector2(1f, 0);
-        static Vector2 uy = new Vector2(0, 1f);
+        static readonly Vector2 ux = new Vector2(1f, 0);
+        static readonly Vector2 uy = new Vector2(0, 1f);
 
         public Engine(Player[] players, Stage stage)
         {
@@ -23,22 +23,38 @@ namespace SmashClone.Driver
 
         public void Play(KeyboardState keyState, KeyboardState lastKeyState)
         {
+            //Player p = _players[0];
+            //p.SetInputStates(keyState, lastKeyState);
+            ////Console.WriteLine("{0} - {1}", inputState, lastInputState);
+            //CalcState2(p);
+            //PlayCharacter(p);
+            //DoPhysics(p);
 
-            Player p = _players[0];
-            State inputState = p.Controls.GetControl(keyState);
-            State lastInputState = p.Controls.GetControl(lastKeyState);
-            //Console.WriteLine("{0} - {1}", inputState, lastInputState);
-            CalcState(p, inputState, lastInputState);
-            PlayCharacter(p);
-            DoPhysics(p);
-            Console.WriteLine(p.AnimationState);
+            //p = _players[1];
+            //p.SetInputStates(keyState, lastKeyState);
+            ////Console.WriteLine("{0} - {1}", inputState, lastInputState);
+            //CalcState(p);
+            //PlayCharacter(p);
+            //DoPhysics(p);
+
+            foreach (Player p in _players)
+            {
+                p.SetInputStates(keyState, lastKeyState);
+                //Console.WriteLine("{0} - {1}", inputState, lastInputState);
+                CalcState(p);
+                PlayCharacter(p);
+                DoPhysics(p);
+                //Console.Write(p.AnimationState);
+                //Console.Write(" | ");
+            }
+            //Console.WriteLine(" ");
         }
 
         public void Draw()
         {
-            foreach (var c in _players)
+            foreach (var p in _players)
             {
-                c.Draw();
+                p.Draw();
             }
         }
 
@@ -46,9 +62,9 @@ namespace SmashClone.Driver
         {
             switch (p.AnimationState)
             {
-                case AnimationState.Idle:
+                case AnimationStates.Idle:
                     break;
-                case AnimationState.Walk:
+                case AnimationStates.Walk:
                     if (p.VolatileState == VolatileStates.FacingLeft)
                     {
                         p.AddAcc(-p.Character.WalkSpeed * ux);
@@ -58,7 +74,7 @@ namespace SmashClone.Driver
                         p.AddAcc(p.Character.WalkSpeed * ux);
                     }
                     break;
-                case AnimationState.Jump:
+                case AnimationStates.Jump:
                     p.AddAcc(uy * p.Character.JumpHeight);
                     break;
                 default:
@@ -66,36 +82,43 @@ namespace SmashClone.Driver
             }
         }
 
-        void CalcState(Player p, State inputState, State lastInputState)
+        void CalcState(Player p)
         {
-            if ((p.VolatileState == VolatileStates.Grounded) && (inputState == Inputs.LInput))
+            if ((p.VolatileState == VolatileStates.Grounded) && (p.InputState == Inputs.LInput))
             {
                 p.VolatileState += VolatileStates.ActiveInput;
                 p.VolatileState += VolatileStates.FacingLeft;
-                p.AnimationState = AnimationState.Walk;
+                p.AnimationState = AnimationStates.Walk;
             }
             else
-            if ((p.VolatileState == VolatileStates.Grounded) && (inputState == Inputs.RInput))
+            if ((p.VolatileState == VolatileStates.Grounded) && (p.InputState == Inputs.RInput))
             {
                 p.VolatileState += VolatileStates.ActiveInput;
                 p.VolatileState -= VolatileStates.FacingLeft;
-                p.AnimationState = AnimationState.Walk;
+                p.AnimationState = AnimationStates.Walk;
             }
             else
-            if ((p.VolatileState == VolatileStates.Grounded) && (inputState == Inputs.JInput) && (lastInputState != Inputs.JInput))
+            if ((p.VolatileState == VolatileStates.Grounded) && (p.InputState == Inputs.JInput) && (p.LastInputState != Inputs.JInput))
             {
                 p.VolatileState += VolatileStates.ActiveInput;
-                p.AnimationState = AnimationState.Jump;
+                p.AnimationState = AnimationStates.Jump;
             }
             else
             {
                 p.VolatileState -= VolatileStates.ActiveInput;
-                p.AnimationState = AnimationState.Idle;
+                p.AnimationState = AnimationStates.Idle;
             }
             //Console.WriteLine(c.State);
         }
 
-        void DoPhysics(Player p)
+        void CalcState2(Player p)
+        {
+            p.VolatileState += VolatileStates.ActiveInput;
+            p.VolatileState += VolatileStates.FacingLeft;
+            p.AnimationState = AnimationStates.Walk;
+        }
+
+            void DoPhysics(Player p)
         {
             if (StageCollision(p))
             {

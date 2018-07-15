@@ -36,7 +36,10 @@ namespace SmashClone.Driver
 
             view = new View(Vector2.Zero, 0.5, 0.0);
             stage = new Stage(-0.3f, 0.00005f);
-            engine = new Engine(new Player[] { new Player(new Characters.DefaultCharacter.Character(), new Controls(), new Vector2(0f, 0f)) }, stage);
+            engine = new Engine(new Player[] {
+                new Player(new Characters.DefaultCharacter.Character(Constants.HitBoxColor), new Controls(1), new Vector2(0f, 0f)),
+                new Player(new Characters.DefaultCharacter.Character(Constants.HurtBoxColor), new Controls(0), new Vector2(0.5f, 0f)),
+            }, stage);
 
         }
 
@@ -84,21 +87,12 @@ namespace SmashClone.Driver
             //GL.End();
 
             stage.Draw();
+
+            GL.EnableClientState(ArrayCap.VertexArray);
+            GL.VertexPointer(2, VertexPointerType.Float, Vector2.SizeInBytes, 0);
             engine.Draw();
 
             this.SwapBuffers();
-        }
-
-        public static void DrawBox(Box box, Vector2 pos, Color color)
-        {
-            float vec = (float)Math.Sin(Math.PI / 4) * box.Radius;
-            GL.Begin(PrimitiveType.Quads);
-            GL.Color3(color);
-            GL.Vertex2(box.Center.X + pos.X - vec, box.Center.Y + pos.Y - vec);
-            GL.Vertex2(box.Center.X + pos.X + vec, box.Center.Y + pos.Y - vec);
-            GL.Vertex2(box.Center.X + pos.X + vec, box.Center.Y + pos.Y + vec);
-            GL.Vertex2(box.Center.X + pos.X - vec, box.Center.Y + pos.Y + vec);
-            GL.End();
         }
     }
 }

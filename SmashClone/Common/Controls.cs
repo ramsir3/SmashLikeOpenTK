@@ -12,16 +12,30 @@ namespace SmashClone.Common
 
         private Dictionary<Key, uint> _controls;
 
-        public Controls()
+        public Controls(int i)
         {
-            _controls = new Dictionary<Key, uint>
+            if (i > 0)
             {
-                { Key.A, Inputs.LInput },
-                { Key.D, Inputs.RInput },
-                //_controls.Add(Key.W, Inputs.UInput);
-                { Key.S, Inputs.DInput },
-                { Key.W, Inputs.JInput }
-            };
+                _controls = new Dictionary<Key, uint>
+                {
+                    { Key.A, Inputs.LInput },
+                    { Key.D, Inputs.RInput },
+                    //_controls.Add(Key.W, Inputs.UInput);
+                    { Key.S, Inputs.DInput },
+                    { Key.W, Inputs.JInput }
+                };
+            }
+            else
+            {
+                _controls = new Dictionary<Key, uint>
+                {
+                    { Key.Left, Inputs.LInput },
+                    { Key.Right, Inputs.RInput },
+                    //_controls.Add(Key.W, Inputs.UInput);
+                    { Key.Down, Inputs.DInput },
+                    { Key.Up, Inputs.JInput }
+                };
+            }
 
         }
 

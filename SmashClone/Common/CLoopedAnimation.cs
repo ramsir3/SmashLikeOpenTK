@@ -10,15 +10,15 @@ namespace SmashClone.Common
     {
         protected override void AdvanceFrame(bool active)
         {
-            if (active && _frame < _main)
+            if (active && (_frame < _main))
             {
                 _frame++;
             }
-            if (active && _frame >= _main)
+            if (active && (_frame >= _main))
             {
                 _frame = _start + 1;
             }
-            if (!active && _frame >= _main)
+            if (!active && (_frame >= _main))
             {
                 _frame++;
             }

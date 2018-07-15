@@ -8,7 +8,7 @@ types = {
 }
 hurtBox = "new Box"
 vector = "new Vector2"
-header= "using System;using OpenTK;using SmashClone;using SmashClone.Common;using static SmashClone.Common.Constants;"
+header= "using System;\nusing OpenTK;\nusing SmashClone;\nusing SmashClone.Common;\nusing static SmashClone.Common.Constants;\n\n"
 state=os.path.basename(fn)
 namespace=os.path.basename(fn[:-(len(state)+6)])
 projectname=os.path.basename(fn[:-(len(state)+len(namespace)+18)])
@@ -20,21 +20,21 @@ state=state.split(".")[0]
 
 def csify(_type,_frame,_end,_start=0,_main=0,_hurtBoxes=0):
 
-    out = header+"namespace "+"SmashClone.Characters."+namespace+"{ public class "+state+":" \
-        +types[_type]+"{"+"public "+state+"(){_frame="+str(_frame)+";" \
-        +"_end="+str(_end)+";" \
-        +"_state=AnimationState."+state+";"
+    out = header+"namespace "+"SmashClone.Characters."+namespace+"\n{\n    public class "+state+" : " \
+        +types[_type]+"\n    {\n"+"        public override void Init()\n        {\n            _frame = "+str(_frame)+";\n" \
+        +"            _end = "+str(_end)+";\n" \
+        +"            _state = AnimationState."+state+";\n"
     if _type == "loop":
-        out += "_main="+str(_main)+";" \
-            +"_start="+str(_start)+";"
-    out += "_hurtBoxes="+hurtBox+"[][]{"
+        out += "            _main="+str(_main)+";\n" \
+            +"            _start="+str(_start)+";\n"
+    out += "            _hurtBoxes = "+hurtBox+"[][]{"
     for f in _hurtBoxes:
-        out+=hurtBox+"[]{"
+        out+="\n                "+hurtBox+"[]{"
         for hb in f:
-            out+=hurtBox+"("+vector+"("+str(hb[0])+"f,"+str(hb[1])+"f),"+str(hb[2])+"f),"
-        out+="},"
-    out+="};}"
-    out+="}"
+            out+="\n                    "+hurtBox+"("+vector+"("+str(hb[0])+"f,"+str(hb[1])+"f),"+str(hb[2])+"f),"
+        out+="\n                },"
+    out+="\n            };        \n        }"
+    out+="\n    }\n"
     out+="}"
     return out
 
