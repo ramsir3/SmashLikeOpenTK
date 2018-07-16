@@ -12,29 +12,25 @@ namespace SmashClone.Common
 {
     public class Stage
     {
-        float _ground;
-        float _friction;
-
-        public float Ground { get { return _ground; } }
-        public float Friction { get { return _friction; } }
+        public float Ground { get; }
+        public float Friction { get; }
 
 
         public Stage(float ground, float friction)
         {
-            _ground = ground;
-            _friction = friction;
+            Ground = ground;
+            Friction = friction;
         }
 
         public void Draw()
         {
             GL.Begin(PrimitiveType.Quads);
             GL.Color3(Color.GhostWhite);
-            GL.Vertex2(-1f, _ground);
-            GL.Vertex2(1f, _ground);
+            GL.Vertex2(-1f, Ground);
+            GL.Vertex2(1f, Ground);
             GL.Vertex2(1f, -0.9f);
             GL.Vertex2(-1f, -0.9f);
             GL.End();
-
         }
     }
 }

@@ -7,7 +7,7 @@ namespace SmashClone.Characters.DefaultCharacter
 {
     public class Walk : CLoopedAnimation
     {
-        public override void Init()
+        protected override void Init()
         {
             _frame = 0;
             _end = 9;

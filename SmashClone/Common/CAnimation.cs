@@ -17,7 +17,7 @@ namespace SmashClone.Common
         protected int _start = -1;
         protected int _main;
         protected int _end = -1;
-        public bool Active;
+        protected bool Active;
 
         public AnimationStates State { get => _state; }
 
@@ -31,9 +31,9 @@ namespace SmashClone.Common
             }
         }
 
-        public abstract void Init();
+        protected abstract void Init();
 
-        public Vector2[] GetOneVecArr(int frame)
+        private Vector2[] GetOneVecArr(int frame)
         {
             if (_hurtBoxes != null && _hurtBoxes.Length != 0)
             {
@@ -55,7 +55,7 @@ namespace SmashClone.Common
             return null;
         }
 
-        public void GetVecArr()
+        private void GetVecArr()
         {
             if (_hurtBoxes != null && _hurtBoxes.Length != 0)
             {

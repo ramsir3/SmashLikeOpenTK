@@ -8,7 +8,6 @@ namespace SmashClone.Characters.DefaultCharacter
 {
     public class Character : Common.Character
     {
-
         public Character(Color color)
         {
             //define character attributes
@@ -21,7 +20,6 @@ namespace SmashClone.Characters.DefaultCharacter
             _animations += new Idle();
             _animations += new Walk();
             _animations += new DefaultAnimation(AnimationStates.Jump);
-
         }
     }
 }

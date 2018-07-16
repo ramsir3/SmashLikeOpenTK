@@ -20,13 +20,14 @@ state=state.split(".")[0]
 
 def csify(_type,_frame,_end,_start=0,_main=0,_hurtBoxes=0):
 
-    out = header+"namespace "+"SmashClone.Characters."+namespace+"\n{\n    public class "+state+" : " \
-        +types[_type]+"\n    {\n"+"        public override void Init()\n        {\n            _frame = "+str(_frame)+";\n" \
-        +"            _end = "+str(_end)+";\n" \
+    out = header+"namespace SmashClone.Characters."+namespace
+		+"\n{\n    public class "+state+" : " 
+        +types[_type]+"\n    {\n"+"        protected override void Init()\n        {\n            _frame = "+str(_frame)+";\n" 
+        +"            _end = "+str(_end)+";\n" 
         +"            _state = AnimationState."+state+";\n"
     if _type == "loop":
-        out += "            _main="+str(_main)+";\n" \
-            +"            _start="+str(_start)+";\n"
+        out += "            _main="+str(_main)+";\n" 
+            +  "            _start="+str(_start)+";\n"
     out += "            _hurtBoxes = "+hurtBox+"[][]{"
     for f in _hurtBoxes:
         out+="\n                "+hurtBox+"[]{"
@@ -34,8 +35,8 @@ def csify(_type,_frame,_end,_start=0,_main=0,_hurtBoxes=0):
             out+="\n                    "+hurtBox+"("+vector+"("+str(hb[0])+"f,"+str(hb[1])+"f),"+str(hb[2])+"f),"
         out+="\n                },"
     out+="\n            };        \n        }"
-    out+="\n    }\n"
-    out+="}"
+    out+="\n    }"
+    out+="\n}"
     return out
 
 with open(fn,'r') as anim:

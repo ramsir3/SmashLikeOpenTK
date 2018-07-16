@@ -60,7 +60,7 @@ namespace SmashClone.Common
         public Color _color;
         #endregion
 
-        protected Character()
+        public Character()
         {
             _animations = new AnimationArray();
         }

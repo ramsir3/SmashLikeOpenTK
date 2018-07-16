@@ -7,7 +7,7 @@ namespace SmashClone.Characters.DefaultCharacter
 {
     public class Idle : CAnimation
     {
-        public override void Init()
+        protected override void Init()
         {
             _frame = 0;
             _end = 0;

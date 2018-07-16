@@ -16,7 +16,7 @@ namespace SmashClone.Common
          * public bool Helpless;
          * public bool Facing == Left;
          */
-        public static uint
+        public const uint
             Grounded = 0b0_0000_0000_0000_0001,
             ActiveInput = 0b0_0000_0000_0000_0010,
             Interruptable = 0b0_0000_0000_0000_0100,

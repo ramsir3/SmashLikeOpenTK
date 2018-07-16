@@ -13,7 +13,7 @@ namespace SmashClone.Characters.DefaultCharacter
             _state = state;
         }
 
-        public override void Init()
+        protected override void Init()
         {
             _frame = 0;
             _hurtBoxes = new Box[][] {
@@ -23,7 +23,5 @@ namespace SmashClone.Characters.DefaultCharacter
                 }
             };
         }
-
-
     }
 }
