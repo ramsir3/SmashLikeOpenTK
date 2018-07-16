@@ -1,27 +1,26 @@
 ﻿using System;
 using SmashClone;
 using OpenTK;
-using static SmashClone.Constants;
+using static SmashClone.Common.Constants;
+using System.Drawing;
 
-namespace DefaultCharacter
+namespace SmashClone.Characters.DefaultCharacter
 {
-    public class Character : SmashClone.Character
+    public class Character : Common.Character
     {
 
-        public Character()
+        public Character(Color color)
         {
-            //define initial state
-            _pos = new Vector2(0, 0);
-
             //define character attributes
             _walkSpeed = 0.0001f;
             _fallSpeed = 0.0005f;
             _jumpHeight = 0.02f;
+            _color = color;
 
             //register animations
             _animations += new Idle();
             _animations += new Walk();
-            _animations += new DefaultAnimation(CharacterState.Jump);
+            _animations += new DefaultAnimation(AnimationStates.Jump);
 
         }
     }

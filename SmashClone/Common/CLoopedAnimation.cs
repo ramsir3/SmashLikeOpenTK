@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmashClone
+namespace SmashClone.Common
 {
     public abstract class CLoopedAnimation:CAnimation
     {
         protected override void AdvanceFrame(bool active)
         {
-            if (active && _frame < _main)
+            if (active && (_frame < _main))
             {
                 _frame++;
             }
-            if (active && _frame >= _main)
+            if (active && (_frame >= _main))
             {
                 _frame = _start + 1;
             }
-            if (!active && _frame >= _main)
+            if (!active && (_frame >= _main))
             {
                 _frame++;
             }

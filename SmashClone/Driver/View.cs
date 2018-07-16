@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using OpenTK;
 using System.Drawing;
 using OpenTK.Graphics.OpenGL;
+using static SmashClone.Common.Constants;
 
-namespace SmashClone
+namespace SmashClone.Driver
 {
     class View
     {
@@ -23,12 +24,14 @@ namespace SmashClone
         /// 1 = no zoom
         /// 2 = 2x zoom
         /// </summary>
-        public double zoom;
+        public double zoomX;
+        public double zoomY;
 
         public View(Vector2 startPosition, double startZoom = 1.0, double startRotation = 0.0)
         {
             this.position = startPosition;
-            this.zoom = startZoom;
+            this.zoomX = (startZoom / GameWidth) * GameWidth;
+            this.zoomY = (startZoom / GameHeight) * GameWidth;
             this.rotation = startRotation;
         }
 
@@ -43,9 +46,10 @@ namespace SmashClone
 
             transform = Matrix4.Mult(transform, Matrix4.CreateTranslation(-position.X, -position.Y, 0));
             transform = Matrix4.Mult(transform, Matrix4.CreateRotationZ(-(float)rotation));
-            transform = Matrix4.Mult(transform, Matrix4.CreateScale((float)zoom, (float)zoom, 1.0f));
+            transform = Matrix4.Mult(transform, Matrix4.CreateScale((float)zoomX, (float)zoomY, 1.0f));
 
-            GL.MultMatrix(ref transform);
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadMatrix(ref transform);
         }
     }
 }

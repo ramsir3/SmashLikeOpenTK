@@ -8,8 +8,9 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System.Drawing;
+using SmashClone.Common;
 
-namespace SmashClone
+namespace SmashClone.Driver
 {
     class Game : GameWindow
     {
@@ -33,16 +34,18 @@ namespace SmashClone
             GL.Enable(EnableCap.AlphaTest);
             GL.AlphaFunc(AlphaFunction.Gequal, 0.5f);
 
-            view = new View(Vector2.Zero, 1.0, 0.0);
+            view = new View(Vector2.Zero, 0.5, 0.0);
             stage = new Stage(-0.3f, 0.00005f);
-            engine = new Engine(new Character[] { new DefaultCharacter.Character(), new DefaultCharacter.Character() }, stage);
+            engine = new Engine(new Player[] {
+                new Player(new Characters.DefaultCharacter.Character(Constants.HitBoxColor), new Controls(1), new Vector2(0f, 0f)),
+                new Player(new Characters.DefaultCharacter.Character(Constants.HurtBoxColor), new Controls(0), new Vector2(0.5f, 0f)),
+            }, stage);
 
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
             texture = ContentPipe.LoadTexture("penguin4.png");
         }
 
@@ -84,21 +87,12 @@ namespace SmashClone
             //GL.End();
 
             stage.Draw();
+
+            GL.EnableClientState(ArrayCap.VertexArray);
+            GL.VertexPointer(2, VertexPointerType.Float, Vector2.SizeInBytes, 0);
             engine.Draw();
 
             this.SwapBuffers();
-        }
-
-        public static void DrawBox(IBox box, Vector2 pos)
-        {
-            float vec = (float)Math.Sin(Math.PI / 4) * box.Radius;
-            GL.Begin(PrimitiveType.Quads);
-            GL.Color3(box.Color);
-            GL.Vertex2(box.Center.X + pos.X - vec, box.Center.Y + pos.Y - vec);
-            GL.Vertex2(box.Center.X + pos.X + vec, box.Center.Y + pos.Y - vec);
-            GL.Vertex2(box.Center.X + pos.X + vec, box.Center.Y + pos.Y + vec);
-            GL.Vertex2(box.Center.X + pos.X - vec, box.Center.Y + pos.Y + vec);
-            GL.End();
         }
     }
 }

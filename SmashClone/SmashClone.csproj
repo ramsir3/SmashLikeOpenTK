@@ -62,13 +62,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\CLoopedAnimation.cs" />
-    <Compile Include="Common\HitBox.cs" />
-    <Compile Include="Common\IBox.cs" />
+    <Compile Include="Common\Box.cs" />
     <Compile Include="Common\Character.cs" />
     <Compile Include="Common\Constants.cs" />
-    <Compile Include="Game\ContentPipe.cs" />
-    <Compile Include="Game\Game.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Common\Controls.cs" />
+    <Compile Include="Common\Inputs.cs" />
+    <Compile Include="Common\Player.cs" />
+    <Compile Include="Common\State.cs" />
+    <Compile Include="Common\VolatileStates.cs" />
+    <Compile Include="Driver\ContentPipe.cs" />
+    <Compile Include="Driver\Draw.cs" />
+    <Compile Include="Driver\Game.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -76,18 +81,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Common\Stage.cs" />
-    <Compile Include="Game\Texture2D.cs" />
-    <Compile Include="Game\View.cs" />
+    <Compile Include="Driver\Texture2D.cs" />
+    <Compile Include="Driver\View.cs" />
     <Compile Include="Common\CAnimation.cs" />
     <Compile Include="Characters\DefaultCharacter\Character.cs" />
     <Compile Include="Characters\DefaultCharacter\Idle.cs" />
-    <Compile Include="Game\Engine.cs" />
+    <Compile Include="Driver\Engine.cs" />
     <Compile Include="Characters\DefaultCharacter\Walk.cs" />
     <Compile Include="Characters\DefaultCharacter\DefaultAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AnimProcessor.bat" />
     <None Include="App.config" />
-    <None Include="Characters\DefaultCharacter\anim\Walk.anim" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -100,7 +105,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="AnimProcessor.py" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
