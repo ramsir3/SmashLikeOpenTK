@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SmashClone.Common.Constants;
+using static OpenPlatformFighter.Common.Constants;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace SmashClone.Common
+namespace OpenPlatformFighter.Common
 {
     public class Player
     {
@@ -27,8 +27,6 @@ namespace SmashClone.Common
         public Vector2 Vel { get => _vel; }
         public Vector2 Acc { get => _acc; }
 
-        public int model;
-
         public Player(Character character, Controls controls, Vector2 pos)
         {
             Character = character;
@@ -39,13 +37,11 @@ namespace SmashClone.Common
             _acc = new Vector2(0, 0);
 
             AnimationState = AnimationStates.Idle;
-
-            //model = GL.GetUniformLocation(shaderpr)
         }
 
         public void Draw()
         {
-            //Console.WriteLine(State);
+            //Console.WriteLine(AnimationState);
             Character.Draw(AnimationState, Pos, VolatileState);
         }
 

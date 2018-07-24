@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmashClone.Common
+namespace OpenPlatformFighter.Common
 {
     public struct State
     {

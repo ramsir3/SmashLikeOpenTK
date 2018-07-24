@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmashClone.Common
+namespace OpenPlatformFighter.Common
 {
     public static class Inputs
     {
@@ -13,7 +13,7 @@ namespace SmashClone.Common
          *    t1234c1234_sjab_udlr
          *     ^    ^
          * taunts  cstick          */
-        public static uint
+        public const uint
             NoInput = 0b0_0000_0000_0000_0000,
             RInput = 0b0_0000_0000_0000_0001,
             LInput = 0b0_0000_0000_0000_0010,

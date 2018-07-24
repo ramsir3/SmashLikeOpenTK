@@ -2,10 +2,10 @@
 using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using static SmashClone.Common.Constants;
-using static SmashClone.Driver.Draw;
+using static OpenPlatformFighter.Common.Constants;
+using static OpenPlatformFighter.Driver.Draw;
 
-namespace SmashClone.Common
+namespace OpenPlatformFighter.Common
 {
     public abstract class CAnimation
     {
@@ -17,23 +17,23 @@ namespace SmashClone.Common
         protected int _start = -1;
         protected int _main;
         protected int _end = -1;
-        public bool Active;
+        protected bool Active;
 
         public AnimationStates State { get => _state; }
 
         public CAnimation()
         {
             Init();
-            if (Constants.UseVBOs)
+            if (UseVBOs)
             {
                 VBO = GL.GenBuffer();
                 GetVecArr();
             }
         }
 
-        public abstract void Init();
+        protected abstract void Init();
 
-        public Vector2[] GetOneVecArr(int frame)
+        private Vector2[] GetOneVecArr(int frame)
         {
             if (_hurtBoxes != null && _hurtBoxes.Length != 0)
             {
@@ -55,7 +55,7 @@ namespace SmashClone.Common
             return null;
         }
 
-        public void GetVecArr()
+        private void GetVecArr()
         {
             if (_hurtBoxes != null && _hurtBoxes.Length != 0)
             {

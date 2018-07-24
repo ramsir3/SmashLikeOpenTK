@@ -1,11 +1,11 @@
 ﻿using System;
 using OpenTK;
 using OpenTK.Input;
-using SmashClone.Common;
-using static SmashClone.Common.Constants;
+using OpenPlatformFighter.Common;
+using static OpenPlatformFighter.Common.Constants;
 
 
-namespace SmashClone.Driver
+namespace OpenPlatformFighter.Driver
 {
     public class Engine
     {
@@ -58,7 +58,7 @@ namespace SmashClone.Driver
             }
         }
 
-        void PlayCharacter(Player p)
+        private void PlayCharacter(Player p)
         {
             switch (p.AnimationState)
             {
@@ -82,7 +82,7 @@ namespace SmashClone.Driver
             }
         }
 
-        void CalcState(Player p)
+        private void CalcState(Player p)
         {
             if ((p.VolatileState == VolatileStates.Grounded) && (p.InputState == Inputs.LInput))
             {
@@ -111,14 +111,14 @@ namespace SmashClone.Driver
             //Console.WriteLine(c.State);
         }
 
-        void CalcState2(Player p)
+        private void CalcState2(Player p)
         {
             p.VolatileState += VolatileStates.ActiveInput;
             p.VolatileState += VolatileStates.FacingLeft;
             p.AnimationState = AnimationStates.Walk;
         }
 
-            void DoPhysics(Player p)
+        private void DoPhysics(Player p)
         {
             if (StageCollision(p))
             {
@@ -140,7 +140,7 @@ namespace SmashClone.Driver
             p.Physics();
         }
 
-        bool Collision(Box box1, Box box2)
+        private bool Collision(Box box1, Box box2)
         {
             Vector2 dp = box1.Center - box2.Center;
             float radii = box1.Radius + box2.Radius;
@@ -151,7 +151,7 @@ namespace SmashClone.Driver
             return false;
         }
 
-        bool StageCollision(Player p)
+        private bool StageCollision(Player p)
         {
             return p.Pos.Y <= _stage.Ground;
         }

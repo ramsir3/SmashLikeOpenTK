@@ -1,13 +1,13 @@
 using System;
 using OpenTK;
-using SmashClone;
-using SmashClone.Common;
-using static SmashClone.Common.Constants;
-namespace SmashClone.Characters.DefaultCharacter
+using OpenPlatformFighter;
+using OpenPlatformFighter.Common;
+using static OpenPlatformFighter.Common.Constants;
+namespace OpenPlatformFighter.Characters.DefaultCharacter
 {
     public class Idle : CAnimation
     {
-        public override void Init()
+        protected override void Init()
         {
             _frame = 0;
             _end = 0;

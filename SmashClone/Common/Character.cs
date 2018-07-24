@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SmashClone.Common.Constants;
-using static SmashClone.Common.VolatileStates;
+using static OpenPlatformFighter.Common.Constants;
+using static OpenPlatformFighter.Common.VolatileStates;
 using System.Drawing;
 
 
-namespace SmashClone.Common
+namespace OpenPlatformFighter.Common
 {
     public abstract class Character
     {
@@ -60,7 +60,7 @@ namespace SmashClone.Common
         public Color _color;
         #endregion
 
-        protected Character()
+        public Character()
         {
             _animations = new AnimationArray();
         }
