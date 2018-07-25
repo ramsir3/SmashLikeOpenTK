@@ -8,9 +8,9 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System.Drawing;
-using SmashClone.Common;
+using OpenPlatformFighter.Common;
 
-namespace SmashClone.Driver
+namespace OpenPlatformFighter.Driver
 {
     class Game : GameWindow
     {
@@ -25,7 +25,7 @@ namespace SmashClone.Driver
             : base(width, height)
         {
             GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Lequal);
@@ -57,7 +57,6 @@ namespace SmashClone.Driver
             keyState = Keyboard.GetState();
             engine.Play(keyState, lastKeystate);
             lastKeystate = keyState;
-
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -67,10 +66,6 @@ namespace SmashClone.Driver
 
             GL.ClearDepth(1);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            GL.LoadIdentity();
-            view.ApplyTransform();
-
 
             //GL.BindTexture(TextureTarget.Texture2D, texture.ID);
             //GL.Begin(PrimitiveType.Quads);
@@ -91,6 +86,9 @@ namespace SmashClone.Driver
             GL.EnableClientState(ArrayCap.VertexArray);
             GL.VertexPointer(2, VertexPointerType.Float, Vector2.SizeInBytes, 0);
             engine.Draw();
+
+            GL.LoadIdentity();
+            view.ApplyTransform();
 
             this.SwapBuffers();
         }

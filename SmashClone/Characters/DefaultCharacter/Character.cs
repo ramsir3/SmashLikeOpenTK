@@ -1,10 +1,10 @@
 ﻿using System;
-using SmashClone;
+using OpenPlatformFighter;
 using OpenTK;
-using static SmashClone.Common.Constants;
+using static OpenPlatformFighter.Common.Constants;
 using System.Drawing;
 
-namespace SmashClone.Characters.DefaultCharacter
+namespace OpenPlatformFighter.Characters.DefaultCharacter
 {
     public class Character : Common.Character
     {

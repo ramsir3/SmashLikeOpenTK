@@ -2,10 +2,10 @@
 using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using static SmashClone.Common.Constants;
-using static SmashClone.Driver.Draw;
+using static OpenPlatformFighter.Common.Constants;
+using static OpenPlatformFighter.Driver.Draw;
 
-namespace SmashClone.Common
+namespace OpenPlatformFighter.Common
 {
     public abstract class CAnimation
     {
@@ -24,7 +24,7 @@ namespace SmashClone.Common
         public CAnimation()
         {
             Init();
-            if (Constants.UseVBOs)
+            if (UseVBOs)
             {
                 VBO = GL.GenBuffer();
                 GetVecArr();

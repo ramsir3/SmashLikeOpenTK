@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Input;
-using static SmashClone.Common.Constants;
-namespace SmashClone.Common
+using static OpenPlatformFighter.Common.Constants;
+namespace OpenPlatformFighter.Common
 {
     public class Controls
     {

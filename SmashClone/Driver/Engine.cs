@@ -1,11 +1,11 @@
 ﻿using System;
 using OpenTK;
 using OpenTK.Input;
-using SmashClone.Common;
-using static SmashClone.Common.Constants;
+using OpenPlatformFighter.Common;
+using static OpenPlatformFighter.Common.Constants;
 
 
-namespace SmashClone.Driver
+namespace OpenPlatformFighter.Driver
 {
     public class Engine
     {

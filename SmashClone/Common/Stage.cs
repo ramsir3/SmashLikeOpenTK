@@ -8,7 +8,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Drawing;
 
-namespace SmashClone.Common
+namespace OpenPlatformFighter.Common
 {
     public class Stage
     {

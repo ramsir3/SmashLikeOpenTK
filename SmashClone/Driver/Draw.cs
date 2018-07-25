@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using SmashClone.Common;
+using OpenPlatformFighter.Common;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmashClone.Driver
+namespace OpenPlatformFighter.Driver
 {
     public static class Draw
     {

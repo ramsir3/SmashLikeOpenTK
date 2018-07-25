@@ -10,7 +10,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace SmashClone.Driver
+namespace OpenPlatformFighter.Driver
 {
     class ContentPipe
     {

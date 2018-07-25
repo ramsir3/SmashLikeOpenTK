@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using OpenTK;
 using System.Drawing;
 using OpenTK.Graphics.OpenGL;
-using static SmashClone.Common.Constants;
+using static OpenPlatformFighter.Common.Constants;
 
-namespace SmashClone.Driver
+namespace OpenPlatformFighter.Driver
 {
     class View
     {
